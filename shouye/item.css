@@ -163,6 +163,9 @@ h3{
     height: 35px;
     border-radius: 10px;
     border: none;
+    text-align: center;
+    font-size: 18px;
+    color: #c1383e;
 }
 
 .inp{
