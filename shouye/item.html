@@ -204,6 +204,7 @@
     <div class="miaosha">
         <div class="miaosha-main">
             <a href="#"><img src="img/time.png" alt=""></a>
+            <div class="inp"><input type="text" id="in1"> : <input type="text" id="in2"> : <input type="text" id="in3"></div>
         </div>
     </div>
     <div class="miaoshalist">
@@ -449,5 +450,46 @@
         $(this).children('div').css('display', 'none');
     });
 </script>
-
+<script type="text/javascript">
+    var box = document.getElementsByTagName("input");
+    //活动结束 时间
+    var end = new Date("2019/6/4 18:00:00");
+    var now = new Date();
+    var timer = null;
+    //获取 两个时间的时间差
+    function getDiff(start,end){
+        return (end.getTime() - start.getTime())/1000;
+    }
+    compute();
+    
+    function compute(){
+            //获得秒数
+        var s = getDiff(now,end);
+        if(s < 0){
+            //box.innerHTML = "活动已过期";
+            clearInterval(timer);
+            return;
+        }
+        //console.log(s);
+        //计算时分秒
+        var hours = s/60/60;
+        var d = parseInt(hours/24);
+        var h = parseInt((hours/24 - d) * 24);
+        var m = parseInt(((hours/24 - d) * 24 - h) * 60);
+        var t = parseInt((((hours/24 - d) * 24 - h) * 60 - m) * 60);
+        
+        //box.innerHTML = "活动距现在还剩" + d +"天" + h + "时" + m + "分" + t + "秒结束";
+        in1.value = parseInt(s/60/60);
+        in2.value = m;
+        in3.value = t;
+    }
+    
+    //让这个时间差每秒钟递减
+    timer = setInterval(function(){
+        now = new Date();
+        compute();
+        console.log(1)
+    },1000);
+    
+</script>
 </html>
